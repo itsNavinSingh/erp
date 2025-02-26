@@ -6,3 +6,9 @@ type LoginApi struct {
 	Role string `json:"Role" binding:"required"`
 	Device string `json:"Device" binding:"required"`
 }
+type UserDetailApi struct {
+	UserID uint `json:"UserID"`
+	Name string `json:"Name"`
+	Email string `json:"Email"`
+	Role string `json:"Role"`
+}
