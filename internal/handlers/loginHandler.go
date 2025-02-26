@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
-
+// Login: This func will handle the Login Request and issue the JWT Token
 func (m *Repository) Login(ctx *gin.Context) {
 
 	var ReqData models.LoginApi

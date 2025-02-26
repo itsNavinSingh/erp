@@ -12,7 +12,7 @@ type Claims struct {
 	models.JWTModel
 	jwt.RegisteredClaims
 }
-
+// CreateToken: Generates the JWT Token and error if any occour
 func CreateToken(data *models.JWTModel, jwtkey []byte) (string, error) {
 	claims := &Claims{
 		JWTModel: *data,
@@ -23,7 +23,7 @@ func CreateToken(data *models.JWTModel, jwtkey []byte) (string, error) {
 	unsignedToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return unsignedToken.SignedString(jwtkey)
 }
-
+// ValidateToken: Check if JWT Token is valid or not and returns User Data related to that token
 func ValidateToken(tokenString string, jwtkey []byte) (models.JWTModel, error) {
 	claims := &Claims{}
 	token, err := jwt.ParseWithClaims(tokenString, claims, func(t *jwt.Token) (interface{}, error) {

@@ -10,6 +10,7 @@ import (
 	"github.com/itsNavinSingh/erp/internal/models"
 )
 
+// RequireAuth: This middleware used to check if a user is authorized or not. If yes, then Attach User Info to Context else Reject the Request
 func RequireAuth(ctx *gin.Context) {
 	var token string
 	var err error
@@ -36,6 +37,8 @@ func RequireAuth(ctx *gin.Context) {
 	ctx.Set("userInfo", UserData)
 	ctx.Next()
 }
+
+// RoleAuth: This middleware used to check if a user is not trying to access the different role route
 func RoleAuth(role string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var token string

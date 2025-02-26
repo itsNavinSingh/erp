@@ -8,7 +8,7 @@ type AppConfig struct {
 	InProduction bool
 	JWTKey []byte
 }
-
+// SetGlobalConfig: Set a Global Config data
 func SetGlobalConfig(conf * AppConfig) {
 	GlobalConfig = conf
 }

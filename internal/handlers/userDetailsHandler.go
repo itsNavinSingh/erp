@@ -8,7 +8,7 @@ import (
 	"github.com/itsNavinSingh/erp/internal/models"
 	"gorm.io/gorm"
 )
-
+// UserDetails: This func will send the User Details i.e. UserID, Name, Email and Role
 func (m *Repository) UserDetails(ctx *gin.Context) {
 	
 	var UserData models.JWTModel
