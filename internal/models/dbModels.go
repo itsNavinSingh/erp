@@ -18,7 +18,7 @@ type User struct {
 // Department: DB Model used to create departments table to store Department data
 type Department struct {
 	ID   uint
-	Name string `gorm:"not null"`
+	Name string `gorm:"unique;not null"`
 }
 
 // Teacher: DB Model used to create teachers table to store Teacher data

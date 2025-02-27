@@ -14,3 +14,7 @@ type UserDetailApi struct {
 	Email string `json:"Email"`
 	Role string `json:"Role"`
 }
+type DepartmentApi struct {
+	ID uint `json:"ID"`
+	Name string `json:"Name" binding:"required"`
+}

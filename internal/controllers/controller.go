@@ -37,5 +37,9 @@ func AdminController(router *gin.Engine){
 	admin.Use(middleware.RoleAuth("admin"))
 	{
 		admin.GET("/userDetails", handlers.Repo.UserDetails)
+		admin.GET("/department", handlers.Repo.GetDepartments)
+		admin.POST("/department", handlers.Repo.AddDepartments)
+		admin.DELETE("/department", handlers.Repo.DeleteDepartments)
+		admin.PATCH("/department", handlers.Repo.EditDepartment)
 	}
 }
