@@ -18,13 +18,13 @@ func (m *Repository) UserDetails(ctx *gin.Context) {
 	userInfo, exists := ctx.Get("userInfo")
 	if !exists {
 		ctx.JSON(http.StatusForbidden, gin.H{
-			"msg": "Something went wrong",
+			"Msg": "Something went wrong",
 		})
 	}
 	UserData, exists = userInfo.(models.JWTModel)
 	if !exists {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"msg": "Something went wrong",
+			"Msg": "Something went wrong",
 		})
 		return
 	}
@@ -36,7 +36,7 @@ func (m *Repository) UserDetails(ctx *gin.Context) {
 			msg = "Something went wrong!"
 		}
 		ctx.JSON(http.StatusForbidden, gin.H{
-			"msg": msg,
+			"Msg": msg,
 		})
 		return
 	}

@@ -18,7 +18,7 @@ func (m *Repository) Login(ctx *gin.Context) {
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
+			"Msg": err.Error(),
 		})
 		return
 	}
@@ -30,7 +30,7 @@ func (m *Repository) Login(ctx *gin.Context) {
 			msg = "Something went wrong!"
 		}
 		ctx.JSON(http.StatusForbidden, gin.H{
-			"msg": msg,
+			"Msg": msg,
 		})
 		return
 	}
@@ -38,26 +38,26 @@ func (m *Repository) Login(ctx *gin.Context) {
 	err = bcrypt.CompareHashAndPassword([]byte(UserData.Password), []byte(ReqData.Password))
 	if err != nil {
 		ctx.JSON(http.StatusForbidden, gin.H{
-			"msg": "Invalid Password",
+			"Msg": "Invalid Password",
 		})
 		return
 	}
 	msg, err = authutils.CreateToken(&models.JWTModel{UserID: UserData.ID, Email: UserData.Email, Role: UserData.Role}, m.App.JWTKey)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"msg": "Internal Server Error",
+			"Msg": "Internal Server Error",
 		})
 		return
 	}
 	if ReqData.Device == "mobile" {
 		ctx.JSON(http.StatusOK, gin.H{
 			"token" : msg,
-			"msg": "Login Successful",
+			"Msg": "Login Successful",
 		})
 	} else {
 		ctx.SetCookie("Auth", msg, 30 * 24 * 3600, "/", "", m.App.InProduction, true)
 		ctx.JSON(http.StatusOK, gin.H{
-			"msg": "Login Successful",
+			"Msg": "Login Successful",
 		})
 	}
 }

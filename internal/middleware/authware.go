@@ -23,14 +23,14 @@ func RequireAuth(ctx *gin.Context) {
 	}
 	if err != nil || token == "" {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"msg": "Unauthorized",
+			"Msg": "Unauthorized",
 		})
 		return
 	}
 	UserData, err = authutils.ValidateToken(token, config.GlobalConfig.JWTKey)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"msg": "Invalid token : " + err.Error(),
+			"Msg": "Invalid token : " + err.Error(),
 		})
 		return
 	}
@@ -52,20 +52,20 @@ func RoleAuth(role string) gin.HandlerFunc {
 		}
 		if err != nil || token == "" {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-				"msg": "Unauthorized",
+				"Msg": "Unauthorized",
 			})
 			return
 		}
 		UserData, err = authutils.ValidateToken(token, config.GlobalConfig.JWTKey)
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-				"msg": "Invalid token: " + err.Error(),
+				"Msg": "Invalid token: " + err.Error(),
 			})
 			return
 		}
 		if UserData.Role != role {
 			ctx.AbortWithStatusJSON(http.StatusForbidden, gin.H{
-				"msg": "Wrong Route",
+				"Msg": "Wrong Route",
 			})
 			return
 		}

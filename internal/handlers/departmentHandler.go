@@ -16,8 +16,8 @@ func (m *Repository) GetDepartments(ctx *gin.Context) {
 	if result.Error != nil {
 		if result.Error != gorm.ErrRecordNotFound {
 			ctx.JSON(http.StatusInternalServerError, gin.H{
-				"msg": "Something went wrong",
-				"data": []models.DepartmentApi{},
+				"Msg": "Something went wrong",
+				"Data": []models.DepartmentApi{},
 			})
 			return
 		}
@@ -27,8 +27,8 @@ func (m *Repository) GetDepartments(ctx *gin.Context) {
 		response[i] = models.DepartmentApi(dept)
 	}
 	ctx.JSON(http.StatusOK, gin.H{
-		"msg": "Successfully fetched all the departments",
-		"data": response,
+		"Msg": "Successfully fetched all the departments",
+		"Data": response,
 	})
 }
 
@@ -39,8 +39,8 @@ func (m *Repository) AddDepartments(ctx *gin.Context) {
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
-			"data": []models.DepartmentApi{},
+			"Msg": err.Error(),
+			"Data": []models.DepartmentApi{},
 		})
 		return
 	}
@@ -51,8 +51,8 @@ func (m *Repository) AddDepartments(ctx *gin.Context) {
 	result := m.App.Database.Create(&NewDept)
 	if result.Error != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"msg": result.Error.Error(),
-			"data": []models.DepartmentApi{},
+			"Msg": result.Error.Error(),
+			"Data": []models.DepartmentApi{},
 		})
 		return
 	}
@@ -60,8 +60,8 @@ func (m *Repository) AddDepartments(ctx *gin.Context) {
 		ReqData[i] = models.DepartmentApi(Newdept)
 	}
 	ctx.JSON(http.StatusOK, gin.H{
-		"msg": "Department added Successfully",
-		"data": ReqData,
+		"Msg": "Department added Successfully",
+		"Data": ReqData,
 	})
 }
 
@@ -73,8 +73,8 @@ func (m *Repository) DeleteDepartments(ctx *gin.Context) {
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
-			"data": []string{},
+			"Msg": err.Error(),
+			"Data": []string{},
 		})
 		return
 	}
@@ -89,15 +89,15 @@ func (m *Repository) DeleteDepartments(ctx *gin.Context) {
 	result := m.App.Database.Where("name IN ?", depts).Delete(&models.Department{})
 	if result.Error != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"msg": result.Error.Error(),
-			"data": []string{},
+			"Msg": result.Error.Error(),
+			"Data": []string{},
 		})
 		return
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"msg": fmt.Sprintf("Departments deleted successfully. RowsAffected: %d", result.RowsAffected),
-		"data": depts,
+		"Msg": fmt.Sprintf("Departments deleted successfully. RowsAffected: %d", result.RowsAffected),
+		"Data": depts,
 	})
 }
 
@@ -108,8 +108,8 @@ func (m *Repository) EditDepartment(ctx *gin.Context) {
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
-			"data": models.DepartmentApi{},
+			"Msg": err.Error(),
+			"Data": models.DepartmentApi{},
 		})
 		return
 	}
@@ -117,21 +117,21 @@ func (m *Repository) EditDepartment(ctx *gin.Context) {
 	var department models.Department
 	if m.App.Database.First(&department, ReqData.ID).Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
-			"msg": fmt.Sprintf("Department not found with ID = %d", ReqData.ID),
-			"data": models.DepartmentApi{},
+			"Msg": fmt.Sprintf("Department not found with ID = %d", ReqData.ID),
+			"Data": models.DepartmentApi{},
 		})
 		return
 	}
 	result := m.App.Database.Model(&department).Updates(models.Department(ReqData))
 	if result.Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
-			"msg": "Failed to Update Department",
-			"data": models.DepartmentApi{},
+			"Msg": "Failed to Update Department",
+			"Data": models.DepartmentApi{},
 		})
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{
-		"msg": fmt.Sprintf("Department Updated Successfully. RowsAffected: %d", result.RowsAffected),
-		"data": ReqData,
+		"Msg": fmt.Sprintf("Department Updated Successfully. RowsAffected: %d", result.RowsAffected),
+		"Data": ReqData,
 	})
 }
