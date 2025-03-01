@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/itsNavinSingh/erp/internal/authutils"
+	"github.com/itsNavinSingh/erp/internal/utils"
 	"github.com/itsNavinSingh/erp/internal/config"
 	"github.com/itsNavinSingh/erp/internal/models"
 )
@@ -27,7 +27,7 @@ func RequireAuth(ctx *gin.Context) {
 		})
 		return
 	}
-	UserData, err = authutils.ValidateToken(token, config.GlobalConfig.JWTKey)
+	UserData, err = utils.ValidateToken(token, config.GlobalConfig.JWTKey)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 			"Msg": "Invalid token : " + err.Error(),
@@ -56,7 +56,7 @@ func RoleAuth(role string) gin.HandlerFunc {
 			})
 			return
 		}
-		UserData, err = authutils.ValidateToken(token, config.GlobalConfig.JWTKey)
+		UserData, err = utils.ValidateToken(token, config.GlobalConfig.JWTKey)
 		if err != nil {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 				"Msg": "Invalid token: " + err.Error(),

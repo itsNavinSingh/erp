@@ -10,6 +10,12 @@ type LoginApi struct {
 // UserDetailApi: Use to send User Data when requested
 type UserDetailApi struct {
 	UserID uint `json:"UserID"`
+	Name string `json:"Name" binding:"required"`
+	Email string `json:"Email" binding:"required"`
+	Role string `json:"Role" binding:"required"`
+}
+type DeleteUserApi struct {
+	UserID uint `json:"UserID" binding:"required"`
 	Name string `json:"Name"`
 	Email string `json:"Email"`
 	Role string `json:"Role"`

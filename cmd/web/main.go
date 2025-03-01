@@ -22,6 +22,7 @@ func Init(app *config.AppConfig) error {
 	if err != nil {
 		return err
 	}
+	initializers.SyncMail(app)
 	return initializers.SyncToDB(app)
 }
 

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/itsNavinSingh/erp/internal/authutils"
+	"github.com/itsNavinSingh/erp/internal/utils"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -42,7 +42,7 @@ func (m *Repository) Login(ctx *gin.Context) {
 		})
 		return
 	}
-	msg, err = authutils.CreateToken(&models.JWTModel{UserID: UserData.ID, Email: UserData.Email, Role: UserData.Role}, m.App.JWTKey)
+	msg, err = utils.CreateToken(&models.JWTModel{UserID: UserData.ID, Email: UserData.Email, Role: UserData.Role}, m.App.JWTKey)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": "Internal Server Error",

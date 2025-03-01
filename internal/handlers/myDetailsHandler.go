@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 // UserDetails: This func will send the User Details i.e. UserID, Name, Email and Role
-func (m *Repository) UserDetails(ctx *gin.Context) {
+func (m *Repository) MyDetails(ctx *gin.Context) {
 	
 	var UserData models.JWTModel
 	var UserDB models.User

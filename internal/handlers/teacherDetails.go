@@ -101,5 +101,48 @@ func (m *Repository) EditTeacher(ctx *gin.Context) {
 		"Data": ReqData,
 	})
 }
-// DeleteTeachers: Delete a teacher information
-func (m *Repository) DeleteTeachers(ctx *gin.Context) {}
+// DeleteTeacher: Delete a teacher information
+func (m *Repository) DeleteTeacher(ctx *gin.Context) {
+	var ReqData models.ViewTeacherApi
+	err := ctx.ShouldBindJSON(&ReqData)
+	if err != nil || ReqData.ID == 0 {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"Msg": err.Error(),
+			"Data": models.ViewTeacherApi{},
+		})
+		return
+	}
+	teacher := models.Teacher{
+		ID: ReqData.ID,
+		Prefix: ReqData.Prefix,
+		Phone: ReqData.Phone,
+	}
+	result := m.App.Database.Preload("User").Preload("Department").Where(&teacher).First(&teacher)
+	if result.Error != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{
+			"Msg": result.Error.Error(),
+			"Data": models.ViewTeacherApi{},
+		})
+		return
+	}
+	result = m.App.Database.Delete(&teacher)
+	if result.Error != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"Msg": result.Error.Error(),
+			"Data": models.ViewTeacherApi{},
+		})
+		return
+	}
+	ReqData = models.ViewTeacherApi{
+		ID: teacher.ID,
+		Email: teacher.User.Email,
+		Prefix: teacher.Prefix,
+		Name: teacher.User.Name,
+		Phone: teacher.Phone,
+		Department: teacher.Department.Name,
+	}
+	ctx.JSON(http.StatusOK, gin.H{
+		"Msg": fmt.Sprintf("Teacher Deleted Successfully. RowsAffected: %d", result.RowsAffected),
+		"Data": ReqData,
+	})
+}
