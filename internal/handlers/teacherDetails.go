@@ -73,7 +73,7 @@ func (m *Repository) EditTeacher(ctx *gin.Context) {
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil || ReqData.ID == 0{
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg": err.Error(),
+			"Msg": "Invalid Data",
 			"Data": models.AddTeacherApi{},
 		})
 		return
@@ -107,7 +107,7 @@ func (m *Repository) DeleteTeacher(ctx *gin.Context) {
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil || ReqData.ID == 0 {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg": err.Error(),
+			"Msg": "Invalid Data",
 			"Data": models.ViewTeacherApi{},
 		})
 		return
