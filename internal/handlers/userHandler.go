@@ -136,12 +136,12 @@ func (m *Repository) DeleteUser(ctx *gin.Context) {
 	})
 }
 func (m *Repository) EditUser(ctx *gin.Context) {
-	var ReqData models.UserDetailApi
+	var ReqData models.DeleteUserApi
 	err := ctx.ShouldBindJSON(&ReqData)
-	if err != nil || ReqData.UserID == 0 {
+	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": err.Error(),
-			"Data": models.UserDetailApi{},
+			"Data": models.DeleteUserApi{},
 		})
 		return
 	}
@@ -150,7 +150,7 @@ func (m *Repository) EditUser(ctx *gin.Context) {
 	if result.Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"Msg": fmt.Sprintf("User not found with ID = %d", ReqData.UserID),
-			"Data": models.UserDetailApi{},
+			"Data": models.DeleteUserApi{},
 		})
 		return
 	}
@@ -158,7 +158,7 @@ func (m *Repository) EditUser(ctx *gin.Context) {
 	if result.Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"Msg": "Failed to update User data",
-			"Data": models.UserDetailApi{},
+			"Data": models.DeleteUserApi{},
 		})
 		return
 	}

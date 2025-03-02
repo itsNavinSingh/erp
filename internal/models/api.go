@@ -39,3 +39,22 @@ type AddTeacherApi struct {
 	Phone uint `json:"Phone" binding:"required"`
 	DepartmentID uint `json:"DepartmentID" binding:"required"`
 }
+type EditTeacher struct {
+    ID           uint `json:"ID" binding:"required"`
+    UserID       uint `json:"UserID"`
+    Prefix       string `json:"Prefix"`
+    Phone        uint `json:"Phone"`
+    DepartmentID uint `json:"DepartmentID"`
+}
+
+type ViewCourseApi struct {
+	ID uint `json:"ID"`
+	Name string `json:"Name" binding:"required"`
+	DepartmentID uint `json:"DepartmentID" binding:"required"`
+	Department string `json:"Department"`
+}
+type EditCourseApi struct {
+	ID uint `json:"ID" binding:"required"`
+	Name string `json:"Name"`
+	DepartmentID uint `json:"DepartmentID"`
+}
