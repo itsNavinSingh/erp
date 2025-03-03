@@ -58,3 +58,17 @@ type EditCourseApi struct {
 	Name string `json:"Name"`
 	DepartmentID uint `json:"DepartmentID"`
 }
+
+type ViewPapersApi struct {
+	ID uint `json:"ID"`
+	Name string `json:"Name" binding:"required"`
+	UPC uint `json:"UPC" binding:"required"`
+	Semister uint `json:"Semister" binding:"required"`
+	DepartmentID uint `json:"DepartmentID" binding:"required"`
+	Department string `json:"Department"`
+	Type string `json:"Type" binding:"required"`
+	CreditL uint `json:"CreditL"`
+	CreditT uint `json:"CreditT"`
+	CreditP uint `json:"CreditP"`
+	Syllabus string `json:"Syllabus" binding:"required"`
+}
