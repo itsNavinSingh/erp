@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/itsNavinSingh/erp/internal/config"
 	"github.com/itsNavinSingh/erp/internal/controllers"
+	"github.com/itsNavinSingh/erp/internal/customvalidators"
 	"github.com/itsNavinSingh/erp/internal/handlers"
 	"github.com/itsNavinSingh/erp/internal/initializers"
 )
@@ -41,6 +42,7 @@ func main() {
 	Route := gin.New()
 	Route.Use(gin.Recovery())
 
+	customvalidators.RegisterCustomValidators(Route)
 	controllers.Controller(Route)
 	Route.Run(":" + os.Getenv("PORT"))
 }

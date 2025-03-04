@@ -90,7 +90,7 @@ func (m *Repository) EditTeacher(ctx *gin.Context) {
 
 	result = m.App.Database.Model(&teacher).Updates(models.Teacher{UserID: ReqData.UserID, Prefix: ReqData.Prefix, Phone: ReqData.Phone, DepartmentID: ReqData.DepartmentID})
 	if result.Error != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{
+		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": "Failed to Update Teacher Data",
 			"Data": models.EditTeacher{},
 		})
