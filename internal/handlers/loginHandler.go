@@ -4,11 +4,13 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/itsNavinSingh/erp/internal/utils"
+	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
+	"github.com/itsNavinSingh/erp/internal/utils"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
+
 // Login: This func will handle the Login Request and issue the JWT Token
 func (m *Repository) Login(ctx *gin.Context) {
 
@@ -17,6 +19,13 @@ func (m *Repository) Login(ctx *gin.Context) {
 	var msg string
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"Msg": err.Error(),
+		})
+		return
+	}
+	validate := ctx.MustGet("validator").(*validator.Validate)
+	if err = validate.Struct(ReqData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": err.Error(),
 		})

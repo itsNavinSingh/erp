@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"github.com/itsNavinSingh/erp/internal/utils"
 )
@@ -40,6 +41,14 @@ func (m *Repository) AddUser(ctx *gin.Context) {
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg":  err.Error(),
+			"Data": models.UserDetailApi{},
+		})
+		return
+	}
+	validate := ctx.MustGet("validator").(*validator.Validate)
+	if err = validate.Struct(ReqData); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"Msg": err.Error(),
 			"Data": models.UserDetailApi{},
 		})
 		return
@@ -108,8 +117,7 @@ func (m *Repository) AddUser(ctx *gin.Context) {
 func (m *Repository) DeleteUser(ctx *gin.Context) {
 	var ReqData models.DeleteUserApi
 
-	err := ctx.ShouldBindJSON(&ReqData)
-	if err != nil {
+	if err := ctx.ShouldBindJSON(&ReqData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg":  err.Error(),
 			"Data": models.DeleteUserApi{},
@@ -137,8 +145,7 @@ func (m *Repository) DeleteUser(ctx *gin.Context) {
 }
 func (m *Repository) EditUser(ctx *gin.Context) {
 	var ReqData models.DeleteUserApi
-	err := ctx.ShouldBindJSON(&ReqData)
-	if err != nil {
+	if err := ctx.ShouldBindJSON(&ReqData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": err.Error(),
 			"Data": models.DeleteUserApi{},

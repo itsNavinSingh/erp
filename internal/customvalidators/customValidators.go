@@ -14,6 +14,7 @@ func RegisterCustomValidators(router *gin.Engine) {
 
 	validate.RegisterValidation("rla_mail", validateEmail)
 	validate.RegisterValidation("valid_phone", validatePhone)
+	validate.RegisterValidation("st_role", validateStRole)
 
 	// ----ADD CUSTOM Validators----- //
 
@@ -22,9 +23,12 @@ func RegisterCustomValidators(router *gin.Engine) {
 		ctx.Next()
 	})
 }
-
+func validateStRole(f validator.FieldLevel) bool {
+	role := f.Field().String()
+	return role == "student" || role == "teacher"
+}
 func validateEmail(f validator.FieldLevel) bool {
-	email :=  strings.ToLower(f.Field().String())
+	email :=  f.Field().String()
 	return strings.HasSuffix(email, "@rla.du.ac.in")
 }
 func validatePhone(f validator.FieldLevel) bool {

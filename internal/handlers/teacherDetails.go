@@ -5,9 +5,11 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"gorm.io/gorm"
 )
+
 // ViewTeachers: View all the teacher details
 func (m *Repository) ViewTeachers(ctx *gin.Context) {
 	var teachers []models.Teacher
@@ -41,6 +43,14 @@ func (m *Repository) AddTeacher(ctx *gin.Context) {
 
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"Msg": err.Error(),
+			"Data": models.AddTeacherApi{},
+		})
+		return
+	}
+	validate := ctx.MustGet("validator").(*validator.Validate)
+	if err = validate.Struct(ReqData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": err.Error(),
 			"Data": models.AddTeacherApi{},
