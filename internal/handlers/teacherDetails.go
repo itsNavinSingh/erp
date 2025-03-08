@@ -79,12 +79,12 @@ func (m *Repository) AddTeacher(ctx *gin.Context) {
 }
 // EditTeacher: Edit Teacher Information
 func (m *Repository) EditTeacher(ctx *gin.Context) {
-	var ReqData models.EditTeacher
+	var ReqData models.EditTeacherApi
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": "Invalid Data",
-			"Data": models.EditTeacher{},
+			"Data": models.EditTeacherApi{},
 		})
 		return
 	}
@@ -93,7 +93,7 @@ func (m *Repository) EditTeacher(ctx *gin.Context) {
 	if result.Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"Msg": fmt.Sprintf("Teacher not found with ID = %d", ReqData.ID),
-			"Data": models.EditTeacher{},
+			"Data": models.EditTeacherApi{},
 		})
 		return
 	}
@@ -102,7 +102,7 @@ func (m *Repository) EditTeacher(ctx *gin.Context) {
 	if result.Error != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": "Failed to Update Teacher Data",
-			"Data": models.EditTeacher{},
+			"Data": models.EditTeacherApi{},
 		})
 		return
 	}
@@ -113,7 +113,7 @@ func (m *Repository) EditTeacher(ctx *gin.Context) {
 }
 // DeleteTeacher: Delete a teacher information
 func (m *Repository) DeleteTeacher(ctx *gin.Context) {
-	var ReqData models.EditTeacher
+	var ReqData models.EditTeacherApi
 	err := ctx.ShouldBindJSON(&ReqData)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
