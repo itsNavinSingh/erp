@@ -43,5 +43,17 @@ func AdminController(router *gin.Engine){
 		admin.POST("/paper", handlers.Repo.AddPaper)
 		admin.PATCH("/paper", handlers.Repo.EditPaper)
 		admin.DELETE("/paper", handlers.Repo.DeletePaper)
+
+		// for student
+		admin.GET("/student", handlers.Repo.ViewStudent)
+		admin.POST("/student", handlers.Repo.AddStudent)
+		admin.PATCH("/student", handlers.Repo.EditStudent)
+		admin.DELETE("/student", handlers.Repo.DeleteStudent)
+
+		// for class
+		admin.GET("/class", handlers.Repo.ViewClass)
+		admin.POST("/class", handlers.Repo.AddClass)
+		admin.PATCH("/class", handlers.Repo.EditClass)
+		admin.DELETE("/class", handlers.Repo.DeleteClass)
 	}
 }

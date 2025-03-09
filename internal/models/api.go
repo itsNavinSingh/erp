@@ -103,11 +103,27 @@ type ViewStudentApi struct {
 	Course         string    `json:"Course"`
 }
 type EditStudentApi struct {
+	ID             uint      `json:"ID" binding:"required,min=1"`
+	UserID         uint      `json:"UserID" binding:"min=1"`
+	Dob            time.Time `json:"Dob"`
+	Phone          uint      `json:"Phone" binding:"valid_phone"`
+	EnrollmentYear uint      `json:"EnrollmentYear"`
+	Semister       uint      `json:"Semister"`
+	CourseID       uint      `json:"CourseID"`
+}
+
+type ViewClassApi struct {
+	ID        uint   `json:"ID"`
+	PaperID   uint   `json:"PaperID" binding:"required,min=1"`
+	Paper     string `json:"Paper"`
+	Type      string `json:"Type" binding:"required,oneof=L T P"`
+	TeacherID uint   `json:"TeacherID" binding:"required,min=1"`
+	Teacher   string `json:"Teacher"`
+}
+
+type EditClassApi struct {
 	ID uint `json:"ID" binding:"required,min=1"`
-	UserID uint `json:"UserID" binding:"min=1"`
-	Dob time.Time `json:"Dob"`
-	Phone uint `json:"Phone" binding:"valid_phone"`
-	EnrollmentYear uint `json:"EnrollmentYear"`
-	Semister uint `json:"Semister"`
-	CourseID uint `json:"CourseID"`
+	PaperID uint `json:"PaperID" binding:"min=1"`
+	Type string `json:"Type" binding:"oneof=L T P"`
+	TeacherID uint `json:"TeacherID" binding:"min=1"`
 }
