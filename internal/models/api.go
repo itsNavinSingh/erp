@@ -127,3 +127,17 @@ type EditClassApi struct {
 	Type string `json:"Type" binding:"oneof=L T P"`
 	TeacherID uint `json:"TeacherID" binding:"min=1"`
 }
+
+type ViewStudentPaperApi struct {
+	ID uint `json:"ID"`
+	StudentID uint `json:"StudentID" binding:"required,min=1"`
+	Student string `json:"Student"`
+	PaperID uint `json:"PaperID" binding:"required,min=1"`
+	Paper string `json:"Paper"`
+}
+
+type EditStudentPaperApi struct {
+	ID uint `json:"ID" binding:"required,min=1"`
+	StudentID uint `json:"StudentID" binding:"min=1"`
+	PaperID uint `json:"PaperID" binding:"min=1"`
+}

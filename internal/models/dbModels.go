@@ -67,7 +67,7 @@ type Student struct {
 	CourseID       uint   `gorm:"not null"`
 	Course         Course `gorm:"foreignKey:CourseID"`
 }
-
+// todo teacher
 // Score: DB Model used to create scores table to store Score data
 type Score struct {
 	ID        uint
@@ -100,7 +100,7 @@ type StudentPaper struct {
 	PaperID   uint    `gorm:"not null"`
 	Paper     Paper   `gorm:"foreignKey:PaperID"`
 }
-
+// todo admin
 // TimeTable: DB Model used to create time_tables table to store Classes and their time
 type TimeTable struct {
 	ID       uint
@@ -110,7 +110,7 @@ type TimeTable struct {
 	Location string    `gorm:"not null"`
 	Start    time.Time `gorm:"type:time;not null"`
 }
-
+// todo teacher
 // Attendence: DB Model used to create attendences table to store Student's Attendence data
 type Attendence struct {
 	gorm.Model
