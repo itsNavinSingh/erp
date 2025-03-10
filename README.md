@@ -1,1 +1,1 @@
-# Enterprise Resourse Palnning(ERP) for Educational Institute
+# Enterprise Resourse Planning(ERP) for Educational Institute
