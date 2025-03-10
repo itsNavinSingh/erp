@@ -141,3 +141,24 @@ type EditStudentPaperApi struct {
 	StudentID uint `json:"StudentID" binding:"min=1"`
 	PaperID uint `json:"PaperID" binding:"min=1"`
 }
+
+type ViewTimetableApi struct {
+	ID uint `json:"ID"`
+	ClassID uint `json:"ClassID" binding:"required,min=1"`
+	PaperID uint `json:"PaperID"`
+	Paper string `json:"Paper"`
+	TeacherID uint `json:"TeacherID"`
+	Teacher string `json:"Teacher"`
+	ClassType string `json:"ClassType"`
+	Day uint `json:"Day" binding:"required,max=6"`
+	Location string `json:"Location" binding:"required"`
+	Start time.Time `json:"Start" binding:"required"`
+}
+
+type EditTimetableApi struct {
+	ID uint `json:"ID" binding:"required,min=1"`
+	ClassID uint `json:"ClassID" binding:"min=1"`
+	Day uint `json:"Day" binding:"max=6"`
+	Location string `json:"Location"`
+	Start time.Time `json:"Start"`
+}
