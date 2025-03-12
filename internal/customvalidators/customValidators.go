@@ -2,14 +2,16 @@ package customvalidators
 
 import (
 	"strings"
-
-	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 )
 
-func RegisterCustomValidators(router *gin.Engine) {
-	validate := validator.New()
+func RegisterCustomValidators() {
+	validate, ok := binding.Validator.Engine().(*validator.Validate)
 
+	if !ok {
+		return
+	}
 	// ----ADD CUSTOM Validators----- //
 
 	validate.RegisterValidation("rla_mail", validateEmail)
@@ -17,18 +19,13 @@ func RegisterCustomValidators(router *gin.Engine) {
 	validate.RegisterValidation("st_role", validateStRole)
 
 	// ----ADD CUSTOM Validators----- //
-
-	router.Use(func(ctx *gin.Context) {
-		ctx.Set("validator", validate)
-		ctx.Next()
-	})
 }
 func validateStRole(f validator.FieldLevel) bool {
 	role := f.Field().String()
 	return role == "student" || role == "teacher"
 }
 func validateEmail(f validator.FieldLevel) bool {
-	email :=  f.Field().String()
+	email := f.Field().String()
 	return strings.HasSuffix(email, "@rla.du.ac.in")
 }
 func validatePhone(f validator.FieldLevel) bool {

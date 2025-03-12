@@ -42,8 +42,8 @@ func main() {
 	Route := gin.New()
 	Route.Use(gin.Recovery())
 
-	customvalidators.RegisterCustomValidators(Route)
-	
+	customvalidators.RegisterCustomValidators()
+
 	controllers.Controller(Route)
 	Route.Run(":" + os.Getenv("PORT"))
 }

@@ -20,6 +20,7 @@ func (m *Repository) MyDetails(ctx *gin.Context) {
 		ctx.JSON(http.StatusForbidden, gin.H{
 			"Msg": "Something went wrong",
 		})
+		return
 	}
 	UserData, exists = userInfo.(models.JWTModel)
 	if !exists {

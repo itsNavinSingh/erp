@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"gorm.io/gorm"
@@ -50,7 +51,13 @@ func (m *Repository) AddClass(ctx *gin.Context) {
 		})
 		return
 	}
-	validate := ctx.MustGet("validator").(*validator.Validate)
+	validate, ok := binding.Validator.Engine().(*validator.Validate)
+	if !ok {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"Msg": "Failed to load validator",
+		})
+		return
+	}
 	if err := validate.Struct(ReqData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": err.Error(),
@@ -122,7 +129,13 @@ func (m *Repository) EditClass(ctx *gin.Context) {
 		})
 		return
 	}
-	validate := ctx.MustGet("validator").(*validator.Validate)
+	validate, ok := binding.Validator.Engine().(*validator.Validate)
+	if !ok {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"Msg": "Failed to load validator",
+		})
+		return
+	}
 	if err = validate.Struct(ReqData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg": err.Error(),
