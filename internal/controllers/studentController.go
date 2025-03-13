@@ -9,7 +9,7 @@ import (
 // StudentController: All the routes related to Student
 func StudentController(router *gin.Engine){
 	student := router.Group("/api/student")
-	student.Use(middleware.RoleAuth("student"))
+	student.Use(middleware.RoleAuth("Student"))
 	{
 		student.GET("/me", handlers.Repo.MyDetails)
 	}

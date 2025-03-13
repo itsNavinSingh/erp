@@ -9,7 +9,7 @@ import (
 // AdminController: All the routes related to Admin
 func AdminController(router *gin.Engine){
 	admin := router.Group("/api/admin")
-	admin.Use(middleware.RoleAuth("admin"))
+	admin.Use(middleware.RoleAuth("Admin"))
 	{
 		// for fetching his details
 		admin.GET("/me", handlers.Repo.MyDetails)

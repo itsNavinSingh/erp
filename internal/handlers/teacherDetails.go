@@ -5,8 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
-	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"gorm.io/gorm"
 )
@@ -50,20 +48,7 @@ func (m *Repository) AddTeacher(ctx *gin.Context) {
 		})
 		return
 	}
-	validate, ok := binding.Validator.Engine().(*validator.Validate)
-	if !ok {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"Msg": "Failed to load validator",
-		})
-		return
-	}
-	if err = validate.Struct(ReqData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg": err.Error(),
-			"Data": models.AddTeacherApi{},
-		})
-		return
-	}
+	
 	Newteacher := models.Teacher{
 		UserID: ReqData.UserID,
 		Prefix: ReqData.Prefix,

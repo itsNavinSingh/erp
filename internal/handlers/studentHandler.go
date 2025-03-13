@@ -5,8 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
-	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"gorm.io/gorm"
 )
@@ -50,20 +48,7 @@ func (m *Repository) AddStudent(ctx *gin.Context) {
 		})
 		return
 	}
-	validate, ok := binding.Validator.Engine().(*validator.Validate)
-	if !ok {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"Msg": "Failed to load validator",
-		})
-		return
-	}
-	if err := validate.Struct(ReqData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg":  err.Error(),
-			"Data": models.ViewStudentApi{},
-		})
-		return
-	}
+
 	newStudent := models.Student{
 		ID:             ReqData.ID,
 		UserID:         ReqData.UserID,
@@ -97,20 +82,7 @@ func (m *Repository) EditStudent(ctx *gin.Context) {
 		})
 		return
 	}
-	validate, ok := binding.Validator.Engine().(*validator.Validate)
-	if !ok {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"Msg": "Failed to load validator",
-		})
-		return
-	}
-	if err := validate.Struct(ReqData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg":  err.Error(),
-			"Data": ResData,
-		})
-		return
-	}
+	
 	var student models.Student
 	result := m.App.Database.First(&student, ReqData.ID)
 	if result.Error != nil {
@@ -160,20 +132,7 @@ func (m *Repository) DeleteStudent(ctx *gin.Context) {
 		})
 		return
 	}
-	validate, ok := binding.Validator.Engine().(*validator.Validate)
-	if !ok {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"Msg": "Failed to load validator",
-		})
-		return
-	}
-	if err := validate.Struct(ReqData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg":  err.Error(),
-			"Data": ResData,
-		})
-		return
-	}
+	
 	student := models.Student{
 		ID:             ReqData.ID,
 		UserID:         ReqData.UserID,

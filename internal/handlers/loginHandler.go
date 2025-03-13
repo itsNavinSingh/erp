@@ -4,8 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
-	"github.com/go-playground/validator/v10"
 	"github.com/itsNavinSingh/erp/internal/models"
 	"github.com/itsNavinSingh/erp/internal/utils"
 	"golang.org/x/crypto/bcrypt"
@@ -25,19 +23,7 @@ func (m *Repository) Login(ctx *gin.Context) {
 		})
 		return
 	}
-	validate, ok := binding.Validator.Engine().(*validator.Validate)
-	if !ok {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"Msg": "Failed to load validator",
-		})
-		return
-	}
-	if err = validate.Struct(ReqData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Msg": err.Error(),
-		})
-		return
-	}
+
 	result := m.App.Database.First(&UserData, models.User{Email: ReqData.Email, Role: ReqData.Role})
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
