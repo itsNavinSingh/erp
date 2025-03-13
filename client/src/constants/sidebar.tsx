@@ -1,47 +1,40 @@
-import { BarChart3, Boxes, LayoutDashboard, LucideProps, Package, Receipt, UserCircle } from "lucide-react";
+import { BarChart3, Boxes, LucideProps, Package, Receipt, User, UserCircle } from "lucide-react";
 
 export interface SidebarData {
     Icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
     Route: string;
     Text: string;
-    Active: boolean;
 }
 
 export const AdminSidebar: SidebarData[] = [
     {
-        Icon: LayoutDashboard,
-        Route: "",
-        Text: "Dashboard",
-        Active: false,
+        Icon: User,
+        Route: "/admin",
+        Text: "Users",
     },
     {
         Icon: BarChart3,
-        Route: "",
+        Route: "/admin/lkj",
         Text: "Statistics",
-        Active: true,
     },
     {
         Icon: UserCircle,
-        Route: "",
+        Route: "/admin/fgh",
         Text: "Users",
-        Active: false,
     },
     {
         Icon: Boxes,
-        Route: "",
+        Route: "/admin/ghi",
         Text: "Inventory",
-        Active: false,
     },
     {
         Icon: Package,
-        Route: "",
+        Route: "/admin/def",
         Text: "Orders",
-        Active: false
     },
     {
         Icon: Receipt,
-        Route: "",
+        Route: "/admin/abc",
         Text: "Billings",
-        Active: false,
     }
 ];

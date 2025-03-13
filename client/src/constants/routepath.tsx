@@ -4,6 +4,7 @@ import LoginPage from "../components/LoginPage";
 import AdminRootLayout from "../components/AdminRootLayout";
 import TeacherRootLayout from "../components/TeacherRootLayout";
 import StudentRootLayout from "../components/StudentRootLayout";
+import UserPage from "../pages/admin/userPage";
 
 export const MainRoutePath: RouteObject[] = [
     {
@@ -11,10 +12,16 @@ export const MainRoutePath: RouteObject[] = [
         element: <BufferPage />,
     },{
         path: "/login",
-        element: <LoginPage />
+        element: <LoginPage />,
     },{
         path: "/admin",
-        element: <AdminRootLayout />
+        element: <AdminRootLayout />,
+        children: [
+            {
+                path: "",
+                element: <UserPage />,
+            }
+        ],
     }, {
         path: "/teacher",
         element: <TeacherRootLayout />

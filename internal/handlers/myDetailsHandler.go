@@ -44,7 +44,7 @@ func (m *Repository) MyDetails(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, &models.UserDetailApi{
 		UserID: UserDB.ID,
 		Name: UserDB.Name,
-		Email: UserDB.Role,
+		Email: UserDB.Email,
 		Role: UserDB.Role,
 	})
 }

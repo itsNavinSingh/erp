@@ -10,7 +10,7 @@ export interface UserDetails {
   setName: (newName: string) => void;
   setEmail: (newEmail: string) => void;
   setRole: (newRole: string) => void;
-  setValues: () => void;
+  setValues: () => Promise<void>;
 }
 interface User {
   UserID: number;
@@ -20,8 +20,8 @@ interface User {
 }
 export const useUserStore = create<UserDetails>()((set, get) => ({
   UserID: 0,
-  Name: "",
-  Email: "",
+  Name: "Guest",
+  Email: "user@gmail.com",
   Role: "",
   setUserID: (newID: number) => set(() => ({ UserID: newID })),
   setName: (newName: string) => set(() => ({ Name: newName })),
