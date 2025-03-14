@@ -46,7 +46,7 @@ export default [
       return {
         Msg: "User Created successfully",
         Data: {
-          UserID: 5,
+          UserID: Math.floor(Math.random() * (100 - 5 + 1)) + 5,
           Name: Name,
           Email: Email,
           Role: Role,

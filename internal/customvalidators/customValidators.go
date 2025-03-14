@@ -22,7 +22,7 @@ func RegisterCustomValidators() {
 }
 func validateStRole(f validator.FieldLevel) bool {
 	role := f.Field().String()
-	return role == "student" || role == "teacher"
+	return role == "Student" || role == "Teacher"
 }
 func validateEmail(f validator.FieldLevel) bool {
 	email := f.Field().String()

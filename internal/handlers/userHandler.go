@@ -11,7 +11,7 @@ import (
 
 func (m *Repository) ViewUsers(ctx *gin.Context) {
 	var users []models.User
-	result := m.App.Database.Where("role IN ?", []string{"teacher", "student"}).Find(&users)
+	result := m.App.Database.Where("role IN ?", []string{"Teacher", "Student"}).Find(&users)
 	ResData := make([]models.UserDetailApi, len(users))
 	if result.Error != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
@@ -45,7 +45,7 @@ func (m *Repository) AddUser(ctx *gin.Context) {
 		return
 	}
 	
-	if ReqData.Role != "teacher" && ReqData.Role != "student" {
+	if ReqData.Role != "Teacher" && ReqData.Role != "Student" {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"Msg":  fmt.Sprintf("Role: %s. is not allowed!", ReqData.Role),
 			"Data": models.UserDetailApi{},
