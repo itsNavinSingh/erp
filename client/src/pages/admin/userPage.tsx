@@ -180,7 +180,6 @@ const UserPage: React.FC = () => {
         );
       })
     );
-    console.log(userdata);
   };
   useEffect(() => {
     getUserData();
@@ -237,6 +236,7 @@ const UserPage: React.FC = () => {
             mainData.length === userdata.length
               ? getUserData
               : () => {
+                setTempUser({UserID: 0, Name: "", Email: "", Role: ""})
                   setuserdata([...mainData]);
                 }
           }
@@ -248,7 +248,7 @@ const UserPage: React.FC = () => {
           </span>
         </button>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-3 overflow-y-auto">
         {userdata.map((data) => (
           <UserElement
             UserID={data.UserID}

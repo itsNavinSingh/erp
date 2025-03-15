@@ -72,6 +72,7 @@ func (m *Repository) AddStudent(ctx *gin.Context) {
 		"Data": ReqData,
 	})
 }
+// to do : use db transaction
 func (m *Repository) EditStudent(ctx *gin.Context) {
 	var ReqData models.EditStudentApi
 	var ResData models.ViewStudentApi
@@ -120,6 +121,7 @@ func (m *Repository) EditStudent(ctx *gin.Context) {
 	})
 
 }
+// to do : use db transaction
 func (m *Repository) DeleteStudent(ctx *gin.Context) {
 	var (
 		ReqData models.EditStudentApi
