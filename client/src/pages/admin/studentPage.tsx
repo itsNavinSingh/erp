@@ -280,7 +280,7 @@ const StudentPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="p-4 w-full h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-all">
+    <div className="p-4 w-full min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-all">
       <div className="block lg:flex my-4 text-sm font-medium space-y-2 lg:space-y-0 lg:space-x-2 items-end text-center">
         <div className="w-full lg:w-2/12 ">
           <p className="text-center">UserID</p>
@@ -434,7 +434,7 @@ const StudentPage: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="space-y-3 overflow-y-auto">
+      <div className="space-y-3">
         {states.showStudent.map((data) => (
           <StudentElement
             Data={data}

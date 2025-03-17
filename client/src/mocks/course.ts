@@ -47,4 +47,84 @@ export default [
       };
     },
   },
+  {
+    url: "/api/admin/course",
+    method: "post",
+    response: ({
+      body,
+    }: {
+      body: { Name: string; DepartmentID: number; Department?: string };
+    }) => {
+      const { Name, DepartmentID, Department = "Something Something" } = body;
+      return {
+        Msg: "Course Created successfully",
+        Data: {
+          ID: Math.floor(Math.random() * (100 - 6)) + 6,
+          Name: Name,
+          DepartmentID: DepartmentID,
+          Department: Department,
+        },
+      };
+    },
+  },
+  {
+    url: "/api/admin/course",
+    method: "patch",
+    response: ({
+      body,
+    }: {
+      body: {
+        ID: number;
+        Name?: string;
+        DepartmentID?: number;
+        Department?: string;
+      };
+    }) => {
+      const {
+        ID,
+        Name = "Something Something",
+        DepartmentID = 1,
+        Department = "Something Something",
+      } = body;
+      return {
+        Msg: "Course edited successfully",
+        Data: {
+          ID: ID,
+          Name: Name,
+          DepartmentID: DepartmentID,
+          Department: Department,
+        },
+      };
+    },
+  },
+  {
+    url: "/api/admin/course",
+    method: "delete",
+    response: ({
+      body,
+    }: {
+      body: {
+        ID: number;
+        Name?: string;
+        DepartmentID?: number;
+        Department?: string;
+      };
+    }) => {
+      const {
+        ID,
+        Name = "Something Something",
+        DepartmentID = 0,
+        Department = "Default Dept",
+      } = body;
+      return {
+        Msg: "Course deleted successfully",
+        Data: {
+          ID: ID,
+          Name: Name,
+          DepartmentID: DepartmentID,
+          Department: Department,
+        },
+      };
+    },
+  },
 ];

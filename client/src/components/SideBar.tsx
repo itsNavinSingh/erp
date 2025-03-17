@@ -17,7 +17,7 @@ const SideBar: React.FC<SideBarProp> = ({ sidebardata, className = "" }) => {
     user.setValues();
   }, []);
   return (
-    <aside className={`h-screen ${className}`}>
+    <aside className={`min-h-screen ${className}`}>
       <nav className="h-full flex flex-col bg-gray-100 dark:bg-gray-900 border-r dark:border-r-white shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center">
           <p
