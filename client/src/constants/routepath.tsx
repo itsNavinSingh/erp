@@ -6,6 +6,7 @@ import TeacherRootLayout from "../components/TeacherRootLayout";
 import StudentRootLayout from "../components/StudentRootLayout";
 import UserPage from "../pages/admin/userPage";
 import StudentPage from "../pages/admin/studentPage";
+import DepartmentPage from "../pages/admin/departmentPage";
 
 export const MainRoutePath: RouteObject[] = [
     {
@@ -25,6 +26,10 @@ export const MainRoutePath: RouteObject[] = [
             {
                 path: "student",
                 element: <StudentPage />
+            },
+            {
+                path: "department",
+                element: <DepartmentPage />
             }
         ],
     }, {
