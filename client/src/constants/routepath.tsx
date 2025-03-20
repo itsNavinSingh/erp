@@ -7,6 +7,7 @@ import StudentRootLayout from "../components/StudentRootLayout";
 import UserPage from "../pages/admin/userPage";
 import StudentPage from "../pages/admin/studentPage";
 import DepartmentPage from "../pages/admin/departmentPage";
+import CoursePage from "../pages/admin/coursePage";
 
 export const MainRoutePath: RouteObject[] = [
     {
@@ -30,6 +31,10 @@ export const MainRoutePath: RouteObject[] = [
             {
                 path: "department",
                 element: <DepartmentPage />
+            },
+            {
+                path: "course",
+                element: <CoursePage />
             }
         ],
     }, {

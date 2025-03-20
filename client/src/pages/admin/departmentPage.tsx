@@ -216,7 +216,7 @@ const DepartmentPage: React.FC = () => {
           </button>
           <button
             onClick={states.editMode ? saveEditDepartment : addDepartment}
-            className="p-2 bg-green-500 gover:bg-green-600 dark:hover:bg-green-400 rounded cursor-pointer"
+            className="p-2 bg-green-500 hover:bg-green-600 dark:hover:bg-green-400 rounded cursor-pointer"
           >
             {states.editMode ? "Save" : "Add Dept"}
           </button>
