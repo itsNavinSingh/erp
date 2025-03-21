@@ -28,12 +28,14 @@ type DepartmentApi struct {
 	Name string `json:"Name" binding:"required"`
 }
 type ViewTeacherApi struct {
-	ID         uint   `json:"ID"`
-	Email      string `json:"Email"`
-	Prefix     string `json:"Prefix"`
-	Name       string `json:"Name"`
-	Phone      uint   `json:"Phone"`
-	Department string `json:"Department"`
+	ID           uint   `json:"ID"`
+	UserID       uint   `json:"UserID"`
+	Email        string `json:"Email"`
+	Prefix       string `json:"Prefix"`
+	Name         string `json:"Name"`
+	Phone        uint   `json:"Phone"`
+	DepartmentID uint   `json:"DepartmentID"`
+	Department   string `json:"Department"`
 }
 type AddTeacherApi struct {
 	ID           uint   `json:"ID"`
@@ -122,43 +124,43 @@ type ViewClassApi struct {
 }
 
 type EditClassApi struct {
-	ID uint `json:"ID" binding:"required,min=1"`
-	PaperID uint `json:"PaperID" binding:"min=1"`
-	Type string `json:"Type" binding:"oneof=L T P"`
-	TeacherID uint `json:"TeacherID" binding:"min=1"`
+	ID        uint   `json:"ID" binding:"required,min=1"`
+	PaperID   uint   `json:"PaperID" binding:"min=1"`
+	Type      string `json:"Type" binding:"oneof=L T P"`
+	TeacherID uint   `json:"TeacherID" binding:"min=1"`
 }
 
 type ViewStudentPaperApi struct {
-	ID uint `json:"ID"`
-	StudentID uint `json:"StudentID" binding:"required,min=1"`
-	Student string `json:"Student"`
-	PaperID uint `json:"PaperID" binding:"required,min=1"`
-	Paper string `json:"Paper"`
+	ID        uint   `json:"ID"`
+	StudentID uint   `json:"StudentID" binding:"required,min=1"`
+	Student   string `json:"Student"`
+	PaperID   uint   `json:"PaperID" binding:"required,min=1"`
+	Paper     string `json:"Paper"`
 }
 
 type EditStudentPaperApi struct {
-	ID uint `json:"ID" binding:"required,min=1"`
+	ID        uint `json:"ID" binding:"required,min=1"`
 	StudentID uint `json:"StudentID" binding:"min=1"`
-	PaperID uint `json:"PaperID" binding:"min=1"`
+	PaperID   uint `json:"PaperID" binding:"min=1"`
 }
 
 type ViewTimetableApi struct {
-	ID uint `json:"ID"`
-	ClassID uint `json:"ClassID" binding:"required,min=1"`
-	PaperID uint `json:"PaperID"`
-	Paper string `json:"Paper"`
-	TeacherID uint `json:"TeacherID"`
-	Teacher string `json:"Teacher"`
-	ClassType string `json:"ClassType"`
-	Day uint `json:"Day" binding:"required,max=6"`
-	Location string `json:"Location" binding:"required"`
-	Start time.Time `json:"Start" binding:"required"`
+	ID        uint      `json:"ID"`
+	ClassID   uint      `json:"ClassID" binding:"required,min=1"`
+	PaperID   uint      `json:"PaperID"`
+	Paper     string    `json:"Paper"`
+	TeacherID uint      `json:"TeacherID"`
+	Teacher   string    `json:"Teacher"`
+	ClassType string    `json:"ClassType"`
+	Day       uint      `json:"Day" binding:"required,max=6"`
+	Location  string    `json:"Location" binding:"required"`
+	Start     time.Time `json:"Start" binding:"required"`
 }
 
 type EditTimetableApi struct {
-	ID uint `json:"ID" binding:"required,min=1"`
-	ClassID uint `json:"ClassID" binding:"min=1"`
-	Day uint `json:"Day" binding:"max=6"`
-	Location string `json:"Location"`
-	Start time.Time `json:"Start"`
+	ID       uint      `json:"ID" binding:"required,min=1"`
+	ClassID  uint      `json:"ClassID" binding:"min=1"`
+	Day      uint      `json:"Day" binding:"max=6"`
+	Location string    `json:"Location"`
+	Start    time.Time `json:"Start"`
 }
