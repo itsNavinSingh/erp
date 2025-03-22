@@ -10,6 +10,7 @@ import axios, { AxiosResponse } from "axios";
 import { useToastStore } from "../../store/toast";
 import { ErrorResponse } from "../../models/error";
 import TeacherElement from "../../components/teacherElement";
+import { RefreshCcw } from "lucide-react";
 
 type MasterTeacherState = {
   masterData: TeacherData[];
@@ -53,6 +54,7 @@ const TeacherPage: React.FC = () => {
       }
     }
   };
+
   const getDept: () => void = async () => {
     try {
       const response = await axios.get<
@@ -239,9 +241,6 @@ const TeacherPage: React.FC = () => {
     setStates((prev) => ({ ...prev, showData: newdata }));
   };
 
-  // to do filter function
-  //   UserRoundIcon, prefix, phone, department
-
   useEffect(() => {
     getDept();
     getTeacher();
@@ -249,6 +248,94 @@ const TeacherPage: React.FC = () => {
 
   return (
     <div className="p-4 w-full min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-all">
+      <div className="block lg:flex space-x-4 my-4 text-lg font-medium space-y-2 lg:space-y-0">
+        <div className="w-full lg:w-1/12">
+          <input
+            type="number"
+            placeholder="User ID"
+            value={states.tempData.UserID}
+            onChange={(e) => {
+              setStates((prev) => ({
+                ...prev,
+                tempData: { ...prev.tempData, UserID: Number(e.target.value) },
+              }));
+            }}
+            className="w-full p-2 rounded bg-gray-300 dark:bg-gray-700"
+          />
+        </div>
+        <div className="w-full lg:w-1/12">
+            <input
+              type="text"
+              placeholder="Prefix"
+              value={states.tempData.Prefix}
+              onChange={(e)=>{
+                setStates((prev)=>({...prev, tempData: {...prev.tempData, Prefix: e.target.value}}));
+              }}
+              className="w-full p-2 rounded bg-gray-300 dark:bg-gray-700" />
+        </div>
+        <div className="w-full lg:w-1/6">
+              <input
+                type="number"
+                placeholder="Phone"
+                value={states.tempData.Phone}
+                onChange={(e)=>{
+                  setStates((prev)=>({...prev, tempData: {...prev.tempData, Phone: Number(e.target.value)}}));
+                }}
+                className="w-full p-2 rounded bg-gray-300 dark:bg-gray-700"
+              />
+        </div>
+        <div className="w-full lg:flex-1">
+        <select
+          name="department"
+          id="department"
+          className="w-full p-2 rounded bg-gray-300 dark:bg-gray-700"
+          value={states.tempData.DepartmentID}
+          onChange={(e)=>{
+            const data = states.uniqueDept.find((elem)=>elem.ID===Number(e.target.value));
+            if (data){
+              setStates((prev)=>({...prev, tempData: {...prev.tempData, Department: data.Name, DepartmentID: data.ID}}));
+            }
+          }}
+        >
+          <option value={0}>Select Department</option>
+          {states.uniqueDept.map((elem)=>(
+            <option value={elem.ID}>{elem.Name}</option>
+          ))}
+        </select>
+        </div>
+        <div className="w-full flex lg:flex-1 lg:space-x-4">
+          <button
+            className="px-4 p-2 dark:bg-blue-700 dark:hover:bg-blue-600 bg-blue-300 hover:bg-blue-400 rounded cursor-pointer"
+            onClick={states.editMode ? cancleEdit : filterTeacher}
+          >
+            {states.editMode ? "Cancle" : "Filter"}
+          </button>
+          <button
+            className="px-4 p-2 bg-green-500 hover:bg-green-600 dark:bg-green-400 rounded cursor-pointer"
+            onClick={states.editMode ? saveEdit : addTeacher}
+          >
+            {states.editMode ? "Save" : "Add"}
+          </button>
+          <button
+            className="px-4 p-2 dark:bg-blue-700 dark:hover:bg-blue-600 bg-blue-300 hover:bg-blue-400 rounded flex items-center justify-evenly cursor-pointer"
+            onClick={
+              states.masterData.length === states.showData.length
+                ? getTeacher
+                : () => {
+                  setStates((prev)=>({...prev, showData: [...prev.masterData], tempData: defaultTeacher()}));
+                } 
+            }
+          >
+            <RefreshCcw />
+            <p className="px-2">
+              {states.masterData.length === states.showData.length
+                ? "Refresh"
+                : "Clear"
+              }
+            </p>
+          </button>
+        </div>
+      </div>
       <div className="space-y-3">
         {states.showData.map((data) => (
           <TeacherElement

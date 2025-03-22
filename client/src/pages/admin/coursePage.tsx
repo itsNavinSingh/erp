@@ -302,7 +302,6 @@ const CoursePage: React.FC = () => {
           </button>
         </div>
       </div>
-      {/* to do */}
       <div className="space-y-3">
         {states.showData.map((course) => (
           <CourseElement
