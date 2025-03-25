@@ -50,7 +50,86 @@ const defaultPaper: (data: {
     Syllabus: Syllabus,
   };
 };
-const getPapers: Paper[] = [];
+const getPapers: Paper[] = [
+  {
+    ID: 1,
+    Name: "Introduction to Parallel Computing",
+    UPC: 1100110001,
+    Semister: 6,
+    DepartmentID: 3,
+    Department: "Computer Science",
+    Type: "DSC",
+    CreditL: 3,
+    CreditP: 1,
+    CreditT: 0,
+    Syllabus: ""
+  },
+  {
+    ID: 2,
+    Name: "Artificial Intellegence",
+    UPC: 2553255311,
+    Semister: 6,
+    DepartmentID: 3,
+    Department: "Computer Science",
+    Type: "DSC",
+    CreditT: 0,
+    CreditL: 3,
+    CreditP: 1,
+    Syllabus: ""
+  },
+  {
+    ID: 3,
+    Name: "Machine Learning",
+    UPC: 5325532511,
+    Semister: 6,
+    DepartmentID: 3,
+    Department: "Computer Science",
+    Type: "DSC",
+    CreditL: 3,
+    CreditP: 1,
+    CreditT: 0,
+    Syllabus: ""
+  },
+  {
+    ID: 4,
+    Name: "Ethical Hacking",
+    UPC: 1102553255,
+    Semister: 6,
+    DepartmentID: 3,
+    Department: "Computer Science",
+    Type: "DSE",
+    CreditL: 3,
+    CreditP: 1,
+    CreditT: 0,
+    Syllabus: ""
+  },
+  {
+    ID: 5,
+    Name: "Survey Sampling and DOE",
+    UPC: 6969696969,
+    Semister: 6,
+    DepartmentID: 1,
+    Department: "Statistics",
+    Type: "GE",
+    CreditL: 3,
+    CreditP: 1,
+    CreditT: 0,
+    Syllabus: ""
+  },
+  {
+    ID: 6,
+    Name: "Introduction to Blockchain",
+    UPC: 9696969696,
+    Semister: 4,
+    DepartmentID: 3,
+    Department: "Computer Science",
+    Type: "SEC",
+    CreditL: 0,
+    CreditP: 2,
+    CreditT: 0,
+    Syllabus: ""
+  }
+];
 export default [
   {
     url: "/api/admin/paper",
