@@ -1,4 +1,4 @@
-import { BookText, BookType, GraduationCap, LucideProps, Network, School, User } from "lucide-react";
+import { BookText, BookType, GraduationCap, LucideProps, Network, School, University, User } from "lucide-react";
 
 export interface SidebarData {
     Icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
@@ -36,5 +36,10 @@ export const AdminSidebar: SidebarData[] = [
         Icon: BookText,
         Route: "/admin/paper",
         Text: "Papers"
+    },
+    {
+        Icon: University,
+        Route: "/admin/class",
+        Text: "Classes"
     }
 ];

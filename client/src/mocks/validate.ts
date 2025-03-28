@@ -1,3 +1,5 @@
+import { MockMethod } from "vite-plugin-mock";
+
 export default [
   {
     url: "/validate",
@@ -9,4 +11,4 @@ export default [
       };
     },
   },
-];
+] as MockMethod[];

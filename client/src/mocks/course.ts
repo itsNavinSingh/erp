@@ -1,3 +1,5 @@
+import { MockMethod } from "vite-plugin-mock";
+
 type Course = {
   ID: number;
   Name: string;
@@ -127,4 +129,4 @@ export default [
       };
     },
   },
-];
+] as MockMethod[];

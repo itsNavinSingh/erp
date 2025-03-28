@@ -5,10 +5,10 @@ export type CourseData = {
   Department: string;
 };
 export type GetCourseResponse = {
-    Msg: string;
-    Data: CourseData[];
-}
+  Msg: string;
+  Data: CourseData[];
+};
 export type BasicCourseResponse = {
-    Msg: string;
-    Data: CourseData;
-}
+  Msg: string;
+  Data: CourseData;
+};

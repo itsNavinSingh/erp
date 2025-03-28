@@ -1,3 +1,5 @@
+import { MockMethod } from "vite-plugin-mock";
+
 type StudentApi = {
   ID: number;
   UserID: number;
@@ -173,4 +175,4 @@ export default [
       };
     },
   },
-];
+] as MockMethod[];

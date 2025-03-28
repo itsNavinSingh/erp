@@ -1,3 +1,5 @@
+import { MockMethod } from "vite-plugin-mock";
+
 type Teacher = {
   ID: number;
   UserID: number;
@@ -147,4 +149,4 @@ export default [
         };
     }
   }
-];
+] as MockMethod[];

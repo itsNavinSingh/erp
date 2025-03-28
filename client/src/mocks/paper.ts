@@ -1,3 +1,5 @@
+import { MockMethod } from "vite-plugin-mock";
+
 type Paper = {
   ID: number;
   Name: string;
@@ -232,4 +234,4 @@ export default [
       };
     },
   },
-];
+] as MockMethod[];

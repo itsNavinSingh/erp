@@ -1,3 +1,5 @@
+import { MockMethod } from "vite-plugin-mock";
+
 type Department = {
     ID: number;
     Name: string;
@@ -85,4 +87,4 @@ export default [
             };
         }
     }
-];
+] as MockMethod[];
