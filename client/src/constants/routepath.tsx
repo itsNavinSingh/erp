@@ -11,6 +11,7 @@ import CoursePage from "../pages/admin/coursePage";
 import TeacherPage from "../pages/admin/teacherPage";
 import PaperPage from "../pages/admin/paperPage";
 import ClassPage from "../pages/admin/classPage";
+import StudentPaperPage from "../pages/admin/studentPaperPage";
 
 export const MainRoutePath: RouteObject[] = [
     {
@@ -50,6 +51,10 @@ export const MainRoutePath: RouteObject[] = [
             {
                 path: "class",
                 element: <ClassPage />
+            },
+            {
+                path: "studentPaper",
+                element: <StudentPaperPage />
             }
         ],
     }, {
