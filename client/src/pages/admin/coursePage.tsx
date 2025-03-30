@@ -10,6 +10,7 @@ import { useToastStore } from "../../store/toast";
 import { DepartmentData, GetDepartmentResponse } from "../../models/department";
 import CourseElement from "../../components/courseElement";
 import { RefreshCcw } from "lucide-react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterCourseState = {
   masterData: CourseData[];
@@ -33,7 +34,7 @@ const CoursePage: React.FC = () => {
       const response = await axios.get<
         GetDepartmentResponse,
         AxiosResponse<GetDepartmentResponse, ErrorResponse>
-      >("/api/admin/department");
+      >(AdminAPI.Department);
       if (response.status === 200) {
         const newdata = response.data.Data;
         setStates((prev) => ({ ...prev, uniqueDept: newdata }));
@@ -54,7 +55,7 @@ const CoursePage: React.FC = () => {
       const response = await axios.get<
         GetCourseResponse,
         AxiosResponse<GetCourseResponse, ErrorResponse>
-      >("/api/admin/course", {
+      >(AdminAPI.Course, {
         withCredentials: true,
       });
       if (response.status === 200) {
@@ -84,7 +85,7 @@ const CoursePage: React.FC = () => {
       const response = await axios.post<
         BasicCourseResponse,
         AxiosResponse<BasicCourseResponse, ErrorResponse>
-      >("/api/admin/course", states.tempData, {
+      >(AdminAPI.Course, states.tempData, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
@@ -125,7 +126,7 @@ const CoursePage: React.FC = () => {
       const response = await axios.patch<
         BasicCourseResponse,
         AxiosResponse<BasicCourseResponse, ErrorResponse>
-      >("/api/admin/course", states.tempData, {
+      >(AdminAPI.Course, states.tempData, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
@@ -164,7 +165,7 @@ const CoursePage: React.FC = () => {
         const response = await axios.delete<
           BasicCourseResponse,
           AxiosResponse<BasicCourseResponse, ErrorResponse>
-        >("/api/admin/course", {
+        >(AdminAPI.Course, {
           data,
           withCredentials: true,
           headers: { "Content-Type": "application/json" },

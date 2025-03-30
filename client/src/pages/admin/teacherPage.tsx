@@ -11,6 +11,7 @@ import { useToastStore } from "../../store/toast";
 import { ErrorResponse } from "../../models/error";
 import TeacherElement from "../../components/teacherElement";
 import { RefreshCcw } from "lucide-react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterTeacherState = {
   masterData: TeacherData[];
@@ -35,7 +36,7 @@ const TeacherPage: React.FC = () => {
       const response = await axios.get<
         GetTeacherResponse,
         AxiosResponse<GetTeacherResponse, ErrorResponse>
-      >("/api/admin/teacher", { withCredentials: true });
+      >(AdminAPI.Teacher, { withCredentials: true });
       if (response.status === 200) {
         const newdata = response.data.Data;
         setStates((prev) => ({
@@ -60,7 +61,7 @@ const TeacherPage: React.FC = () => {
       const response = await axios.get<
         GetDepartmentResponse,
         AxiosResponse<GetDepartmentResponse, ErrorResponse>
-      >("/api/admin/department", { withCredentials: true });
+      >(AdminAPI.Department, { withCredentials: true });
       if (response.status === 200) {
         const newdata = response.data.Data;
         setStates((prev) => ({ ...prev, uniqueDept: newdata }));
@@ -89,7 +90,7 @@ const TeacherPage: React.FC = () => {
       const response = await axios.post<
         BasicTeacherResponse,
         AxiosResponse<BasicTeacherResponse, ErrorResponse>
-      >("/api/admin/teacher", states.tempData, { withCredentials: true });
+      >(AdminAPI.Teacher, states.tempData, { withCredentials: true });
       if (response.status === 200) {
         const newdata = response.data.Data;
         setStates((prev) => ({
@@ -133,7 +134,7 @@ const TeacherPage: React.FC = () => {
         const response = await axios.patch<
           BasicTeacherResponse,
           AxiosResponse<BasicTeacherResponse, ErrorResponse>
-        >("/api/admin/teacher", states.tempData, {
+        >(AdminAPI.Teacher, states.tempData, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
@@ -185,7 +186,7 @@ const TeacherPage: React.FC = () => {
         const response = await axios.delete<
           BasicTeacherResponse,
           AxiosResponse<BasicTeacherResponse, ErrorResponse>
-        >("/api/admin/teacher", {
+        >(AdminAPI.Teacher, {
           data,
           withCredentials: true,
           headers: { "Content-Type": "application/json" },

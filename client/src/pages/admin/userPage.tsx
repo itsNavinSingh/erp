@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useToastStore } from "../../store/toast";
 import UserElement from "../../components/userElement";
 import { RefreshCcw } from "lucide-react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type User = {
   UserID: number;
@@ -38,7 +39,7 @@ const UserPage: React.FC = () => {
       const response = await axios.get<
         GetUserResponse,
         AxiosResponse<GetUserResponse, ErrorResponse>
-      >("/api/admin/user", {
+      >(AdminAPI.User, {
         withCredentials: true,
       });
       if (response.status === 200) {
@@ -65,7 +66,7 @@ const UserPage: React.FC = () => {
         const response = await axios.post<
           BasicUserResponse,
           AxiosResponse<BasicUserResponse, ErrorResponse>
-        >("/api/admin/user", tempUser, { withCredentials: true });
+        >(AdminAPI.User, tempUser, { withCredentials: true });
         if (response.status === 200) {
           const newdata = [...mainData, response.data.Data];
           setMainData(newdata);
@@ -96,7 +97,7 @@ const UserPage: React.FC = () => {
         const response = await axios.delete<
           BasicUserResponse,
           AxiosResponse<BasicUserResponse, ErrorResponse>
-        >("/api/admin/user", {
+        >(AdminAPI.User, {
           data,
           headers: {
             "Content-Type": "application/json",
@@ -136,7 +137,7 @@ const UserPage: React.FC = () => {
       const response = await axios.patch<
         BasicUserResponse,
         AxiosResponse<BasicUserResponse, ErrorResponse>
-      >("/api/admin/user", tempUser, {
+      >(AdminAPI.User, tempUser, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });

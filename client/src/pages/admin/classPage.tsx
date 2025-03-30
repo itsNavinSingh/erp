@@ -10,6 +10,7 @@ import { ErrorResponse } from "../../models/error";
 import { useToastStore } from "../../store/toast";
 import ClassElement from "../../components/classElement";
 import { RefreshCcw } from "lucide-react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterClassState = {
   masterData: ClassData[];
@@ -31,7 +32,7 @@ const ClassPage: React.FC = () => {
       const response = await axios.get<
         GetClassResponse,
         AxiosResponse<GetClassResponse, ErrorResponse>
-      >("/api/admin/class", { withCredentials: true });
+      >(AdminAPI.Class, { withCredentials: true });
       if (response.status === 200) {
         const newdata = response.data.Data;
         console.log(newdata);
@@ -64,7 +65,7 @@ const ClassPage: React.FC = () => {
       const response = await axios.post<
         BasicClassResponse,
         AxiosResponse<BasicClassResponse, ErrorResponse>
-      >("/api/admin/class", states.tempData, { withCredentials: true });
+      >(AdminAPI.Class, states.tempData, { withCredentials: true });
       if (response.status === 200) {
         const newdata = [...states.masterData, response.data.Data];
         setStates((prev) => ({
@@ -110,7 +111,7 @@ const ClassPage: React.FC = () => {
       const response = await axios.patch<
         BasicClassResponse,
         AxiosResponse<BasicClassResponse, ErrorResponse>
-      >("/api/admin/class", states.tempData, {
+      >(AdminAPI.Class, states.tempData, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
@@ -154,7 +155,7 @@ const ClassPage: React.FC = () => {
       const response = await axios.delete<
         BasicClassResponse,
         AxiosResponse<BasicClassResponse, ErrorResponse>
-      >("/api/admin/class", {
+      >(AdminAPI.Class, {
         data,
         withCredentials: true,
         headers: { "Content-Type": "application/json" },

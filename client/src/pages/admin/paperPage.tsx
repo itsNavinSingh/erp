@@ -11,6 +11,8 @@ import axios, { AxiosResponse } from "axios";
 import { ErrorResponse } from "../../models/error";
 import PaperElement from "../../components/paperElement";
 import { RefreshCcw } from "lucide-react";
+import React from "react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterPaperState = {
   masterData: PaperData[];
@@ -34,7 +36,7 @@ const PaperPage: React.FC = () => {
       const response = await axios.get<
         GetDepartmentResponse,
         AxiosResponse<GetDepartmentResponse, ErrorResponse>
-      >("/api/admin/department", { withCredentials: true });
+      >(AdminAPI.Department, { withCredentials: true });
       if (response.status === 200) {
         setStates((prev) => ({ ...prev, uniqueDept: response.data.Data }));
       } else {
@@ -54,7 +56,7 @@ const PaperPage: React.FC = () => {
       const response = await axios.get<
         GetPaperResponse,
         AxiosResponse<GetPaperResponse, ErrorResponse>
-      >("/api/admin/paper", { withCredentials: true });
+      >(AdminAPI.Paper, { withCredentials: true });
       if (response.status === 200) {
         const newdata = response.data.Data;
         console.log(newdata);
@@ -89,7 +91,7 @@ const PaperPage: React.FC = () => {
       const response = await axios.post<
         BasicPaperResponse,
         AxiosResponse<BasicPaperResponse, ErrorResponse>
-      >("/api/admin/paper", states.tempData, { withCredentials: true });
+      >(AdminAPI.Paper, states.tempData, { withCredentials: true });
       if (response.status === 200) {
         const newdata = [...states.masterData, response.data.Data];
         setStates((prev) => ({
@@ -120,7 +122,7 @@ const PaperPage: React.FC = () => {
       const response = await axios.delete<
         BasicPaperResponse,
         AxiosResponse<BasicPaperResponse, ErrorResponse>
-      >("/api/admin/paper", {
+      >(AdminAPI.Paper, {
         data,
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
@@ -168,7 +170,7 @@ const PaperPage: React.FC = () => {
       const response = await axios.patch<
         BasicPaperResponse,
         AxiosResponse<BasicPaperResponse, ErrorResponse>
-      >("/api/admin/paper", states.tempData, {
+      >(AdminAPI.Paper, states.tempData, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });

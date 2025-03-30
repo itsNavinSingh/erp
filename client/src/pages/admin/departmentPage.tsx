@@ -9,6 +9,7 @@ import axios, { AxiosResponse } from "axios";
 import { ErrorResponse } from "../../models/error";
 import DepartmentElement from "../../components/departmentElement";
 import { RefreshCcw } from "lucide-react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterDepartmentState = {
   masterData: DepartmentData[];
@@ -30,7 +31,7 @@ const DepartmentPage: React.FC = () => {
       const response = await axios.get<
         GetDepartmentResponse,
         AxiosResponse<GetDepartmentResponse, ErrorResponse>
-      >("/api/admin/department", { withCredentials: true });
+      >(AdminAPI.Department, { withCredentials: true });
       if (response.status == 200) {
         const data = response.data.Data;
         setStates((prev) => ({
@@ -58,7 +59,7 @@ const DepartmentPage: React.FC = () => {
       const response = await axios.post<
         BasicDepartmentResponse,
         AxiosResponse<BasicDepartmentResponse, ErrorResponse>
-      >("/api/admin/department", states.tempDepartment, {
+      >(AdminAPI.Department, states.tempDepartment, {
         withCredentials: true,
       });
       if (response.status === 200) {
@@ -90,7 +91,7 @@ const DepartmentPage: React.FC = () => {
         const response = await axios.delete<
           BasicDepartmentResponse,
           AxiosResponse<BasicDepartmentResponse, ErrorResponse>
-        >("/api/admin/department", {
+        >(AdminAPI.Department, {
           data,
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -142,7 +143,7 @@ const DepartmentPage: React.FC = () => {
       const response = await axios.patch<
         BasicDepartmentResponse,
         AxiosResponse<BasicDepartmentResponse, ErrorResponse>
-      >("/api/admin/department", states.tempDepartment, {
+      >(AdminAPI.Department, states.tempDepartment, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });

@@ -10,6 +10,7 @@ import StudentElement from "../../components/studentElement";
 import { RefreshCcw } from "lucide-react";
 import { ErrorResponse } from "../../models/error";
 import { CourseData, GetCourseResponse } from "../../models/course";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterStudentState = {
   masterData: StudentData[];
@@ -45,7 +46,7 @@ const StudentPage: React.FC = () => {
       const response = await axios.get<
         GetCourseResponse,
         AxiosResponse<GetCourseResponse, ErrorResponse>
-      >("/api/admin/course", { withCredentials: true });
+      >(AdminAPI.Course, { withCredentials: true });
       if (response.status === 200) {
         const data = response.data.Data;
         setStates((prev) => ({ ...prev, uniqueCourse: data }));
@@ -66,7 +67,7 @@ const StudentPage: React.FC = () => {
       const response = await axios.get<
         GetStudentsResponse,
         AxiosResponse<GetStudentsResponse, ErrorResponse>
-      >("/api/admin/student", { withCredentials: true });
+      >(AdminAPI.Student, { withCredentials: true });
       if (response.status === 200) {
         const data = response.data.Data;
         setStates((prev) => ({ ...prev, masterData: data, showStudent: data }));
@@ -96,7 +97,7 @@ const StudentPage: React.FC = () => {
       const response = await axios.post<
         BasicStudentResponse,
         AxiosResponse<BasicStudentResponse, ErrorResponse>
-      >("/api/admin/student", states.tempStudent, { withCredentials: true });
+      >(AdminAPI.Student, states.tempStudent, { withCredentials: true });
       if (response.status === 200) {
         const newdata = [...states.masterData, response.data.Data];
         setStates((prev) => ({
@@ -140,7 +141,7 @@ const StudentPage: React.FC = () => {
         const response = await axios.delete<
           BasicStudentResponse,
           AxiosResponse<BasicStudentResponse, ErrorResponse>
-        >("/api/admin/student", {
+        >(AdminAPI.Student, {
           data,
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -176,7 +177,7 @@ const StudentPage: React.FC = () => {
       const response = await axios.patch<
         BasicStudentResponse,
         AxiosResponse<BasicStudentResponse, ErrorResponse>
-      >("/api/admin/student", states.tempStudent, {
+      >(AdminAPI.Student, states.tempStudent, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });

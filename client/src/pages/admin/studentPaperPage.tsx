@@ -10,6 +10,7 @@ import axios, { AxiosResponse } from "axios";
 import { ErrorResponse } from "../../models/error";
 import StudentPaperElement from "../../components/studentPaperElement";
 import { RefreshCcw } from "lucide-react";
+import { AdminAPI } from "../../constants/apiroute";
 
 type MasterStdPepState = {
   masterData: StudentPaperData[];
@@ -32,7 +33,7 @@ const StudentPaperPage: React.FC = () => {
       const response = await axios.get<
         GetStdPepResponse,
         AxiosResponse<GetStdPepResponse, ErrorResponse>
-      >("/api/admin/studentPaper", { withCredentials: true });
+      >(AdminAPI.StudentPaper, { withCredentials: true });
       if (response.status === 200) {
         const newdata = response.data.Data;
         setStates((prev) => ({
@@ -60,7 +61,7 @@ const StudentPaperPage: React.FC = () => {
       const response = await axios.post<
         BasicStdPepResponse,
         AxiosResponse<BasicStdPepResponse, ErrorResponse>
-      >("/api/admin/studentPaper", states.tempData, { withCredentials: true });
+      >(AdminAPI.StudentPaper, states.tempData, { withCredentials: true });
       if (response.status === 200) {
         const newdata = [...states.masterData, response.data.Data];
         setStates((prev) => ({
@@ -117,7 +118,7 @@ const StudentPaperPage: React.FC = () => {
       const response = await axios.patch<
         BasicStdPepResponse,
         AxiosResponse<BasicStdPepResponse, ErrorResponse>
-      >("/api/admin/studentPaper", states.tempData, {
+      >(AdminAPI.StudentPaper, states.tempData, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
@@ -162,7 +163,7 @@ const StudentPaperPage: React.FC = () => {
       const response = await axios.delete<
         BasicStdPepResponse,
         AxiosResponse<BasicStdPepResponse, ErrorResponse>
-      >("/api/admin/studentPaper", {
+      >(AdminAPI.StudentPaper, {
         data,
         withCredentials: true,
         headers: {
