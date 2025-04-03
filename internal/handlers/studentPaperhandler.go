@@ -12,7 +12,7 @@ import (
 func (m *Repository) ViewStudentPaper(ctx *gin.Context) {
 	var studentPapers []models.StudentPaper
 
-	result := m.App.Database.Preload("Student").Preload("Paper").Preload("User").Find(&studentPapers)
+	result := m.App.Database.Preload("Student.User").Preload("Paper").Find(&studentPapers)
 	ResData := make([]models.ViewStudentPaperApi, 0, len(studentPapers))
 	if result.Error != nil && result.Error != gorm.ErrRecordNotFound {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
@@ -76,7 +76,7 @@ func (m *Repository) AddStudentPaper(ctx *gin.Context) {
 		return
 	}
 
-	if err := tx.Preload("Student").Preload("Paper").Preload("User").First(&studentPaper, studentPaper.ID).Error; err != nil {
+	if err := tx.Preload("Student.User").Preload("Paper").First(&studentPaper, studentPaper.ID).Error; err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": err.Error(),
 			"Data": ResData,
@@ -153,7 +153,7 @@ func (m *Repository) EditStudentPaper(ctx *gin.Context) {
 		return
 	}
 
-	if err = tx.Preload("User").Preload("Student").Preload("Paper").First(&studentPaper, ReqData.ID).Error; err != nil {
+	if err = tx.Preload("Student.User").Preload("Paper").First(&studentPaper, ReqData.ID).Error; err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": err.Error(),
 			"Data": ResData,
@@ -202,7 +202,7 @@ func (m *Repository) DeleteStudentPaper(ctx *gin.Context) {
 		})
 		return
 	}
-	if err = tx.Preload("Student").Preload("Paper").Preload("User").First(&studentPaper, ReqData.ID).Error; err != nil {
+	if err = tx.Preload("Student.User").Preload("Paper").First(&studentPaper, ReqData.ID).Error; err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"Msg": fmt.Sprintf("Student's Paper not found with ID = %d", ReqData.ID),
 			"Data": ResData,

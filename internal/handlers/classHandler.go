@@ -12,7 +12,7 @@ import (
 func (m *Repository) ViewClass(ctx *gin.Context) {
 	var classes []models.Class
 	
-	result := m.App.Database.Preload("Paper").Preload("Teacher").Preload("User").Find(&classes)
+	result := m.App.Database.Preload("Paper").Preload("Teacher.User").Find(&classes)
 	ResData := make([]models.ViewClassApi, 0, len(classes))
 
 	if result.Error != nil && result.Error != gorm.ErrRecordNotFound {
@@ -71,7 +71,7 @@ func (m *Repository) AddClass(ctx *gin.Context) {
 		tx.Rollback()
 		return
 	}
-	if err := tx.Preload("Paper").Preload("Teacher").Preload("User").First(&newClass, newClass.ID).Error; err != nil {
+	if err := tx.Preload("Paper").Preload("Teacher.User").First(&newClass, newClass.ID).Error; err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": err.Error(),
 			"Data": ResData,
@@ -143,7 +143,7 @@ func (m *Repository) EditClass(ctx *gin.Context) {
 		tx.Rollback()
 		return
 	}
-	if err = tx.Preload("Paper").Preload("Teacher").Preload("User").First(&class, ReqData.ID).Error; err != nil {
+	if err = tx.Preload("Paper").Preload("Teacher.User").First(&class, ReqData.ID).Error; err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"Msg": err.Error(),
 			"Data": ResData,
@@ -190,7 +190,7 @@ func (m *Repository) DeleteClass(ctx *gin.Context) {
 		PaperID: ReqData.PaperID,
 		TeacherID: ReqData.TeacherID,
 	}
-	if err = m.App.Database.Preload("Paper").Preload("Teacher").Preload("User").Where(&class).First(&class).Error; err != nil {
+	if err = m.App.Database.Preload("Paper").Preload("Teacher.User").Where(&class).First(&class).Error; err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"Msg": err.Error(),
 			"Data": ResData,
